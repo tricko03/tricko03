@@ -1,0 +1,7 @@
+- 👋 Hi, ich bin Emil
+- 👀 Ich bin Interessiert an MMORPG und anderen Open Worlds
+- 🌱 Momentan lerne ich wie man KI aktiv in die Programmierung einbindet (ChatGPT4o)
+- 💞️ Ich arbeite momentan als Administrator des MCTorn Server Netzwerks und verwalte die das Content Team, das Gameplay Developement und die Builderabteilung
+- 📫 Man erreicht mich via Discord, dort heiße ich "triko03"
+- 😄 Pronouns: he/him
+- ⚡ Fun fact: Ich habe den Rheinmetall Aktienkurs kurzzeitig gecrasht
