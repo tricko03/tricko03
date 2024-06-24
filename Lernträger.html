@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="de">
+
+<head>
+    <meta charset="utf-8">
+    <title>Informatik Software Engineering</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="shortcut icon" href="favicon.ico">
+    <style>
+        /* Allgemeine Stile für die Seite */
+        body {
+            display: flex;
+            margin: 0;
+            font-family: Arial, sans-serif;
+            overflow: hidden; /* Verhindert Scrollen der Seite */
+        }
+        main {
+            flex: 3;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.8); /* Leicht transparentes weißes Overlay für bessere Lesbarkeit */
+            position: relative;
+            z-index: 2;
+        }
+        aside {
+            flex: 1;
+            padding: 20px;
+            background-color: #f4f4f4;
+            border-left: 1px solid #ccc;
+            margin-left: 20px;
+            position: relative;
+            z-index: 2;
+        }
+        /* Stile für die Werbeanzeige */
+        .ad img {
+            width: 100%;
+            height: auto;
+            display: block;
+            margin-bottom: 10px;
+        }
+        .ad a {
+            text-decoration: none;
+            color: #333;
+        }
+        .ad a:hover {
+            text-decoration: underline;
+        }
+        h1 {
+            color: #333;
+        }
+        h2 {
+            color: #666;
+        }
+        label, input {
+            display: block;
+            margin-bottom: 10px;
+        }
+        button {
+            padding: 10px 15px;
+            background-color: #28a745;
+            color: white;
+            border: none;
+            cursor: pointer;
+            margin-bottom: 10px;
+        }
+        button:hover {
+            background-color: #218838;
+        }
+        /* Container für die Buttons */
+        .button-container {
+            display: flex;
+            align-items: center;
+        }
+        .button-container button {
+            margin-right: 10px;
+        }
+        /* Hintergrundbild-Stile und Animation */
+        .background {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('https://th.bing.com/th/id/OIP.n9-k_UqScZbsz9b-_Am1IAHaEK?rs=1&pid=ImgDetMain');
+            background-size: cover;
+            background-position: center;
+            transform: scale(1.2);
+            animation: slowPan 120s infinite linear;
+            z-index: 1;
+        }
+        /* Animation für langsame Bewegung des Hintergrundbildes */
+        @keyframes slowPan {
+            0% {
+                transform: scale(1.2) translate(0, 0);
+            }
+            50% {
+                transform: scale(1.2) translate(-20px, -20px);
+            }
+            100% {
+                transform: scale(1.2) translate(0, 0);
+            }
+        }
+        /* Layout der Hauptinhalte */
+        .content {
+            display: flex;
+            justify-content: space-between;
+        }
+        .left, .right {
+            width: 48%;
+        }
+        .center {
+            text-align: center;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Hintergrundbild -->
+    <div class="background"></div>
+    <main>
+        <h1>Inbetriebnahme Lernträger</h1>
+        <div class="content">
+            <div class="left">
+                <section>
+                    <h2>YouTube Kanal Analyse</h2>
+                    <label for="inputYouTubeLink">YouTube Kanal Link</label>
+                    <input id="inputYouTubeLink" name="youtubeLink" type="text" placeholder="YouTube Kanal Link" />
+                    <div class="button-container">
+                        <button onclick="analyzeYouTubeChannel()">Kanal analysieren</button>
+                        <button onclick="driveCar()">Fahrwerk steuern</button>
+                    </div>
+                    <p id="channelValue"></p> <!-- Hier wird die Nachricht angezeigt -->
+                </section>
+            </div>
+            <div class="right">
+                <section>
+                    <h2>Fahrwerk</h2>
+                    <input type="radio" id="forward" name="driveControl" value="forward" checked>
+                    <label for="forward">Vorwärts</label>
+                    <input type="radio" id="backward" name="driveControl" value="backward">
+                    <label for="backward">Rückwärts</label>
+                    <input type="radio" id="flight" name="driveControl" value="flight">
+                    <label for="flight">Flugmodus</label>
+                </section>
+            </div>
+        </div>
+        <div class="center">
+            <section>
+                <h2>Erklärung</h2>
+                <p>Der Wert des Kanals wird berechnet, indem die Gesamtaufrufe des Kanals durch die Anzahl der Abonnenten geteilt werden. Dieses Verhältnis gibt eine ungefähre Vorstellung davon, wie viel Engagement der Kanal pro Abonnent hat.</p>
+                <p id="calculatedValueText">Erhaltener Wert: <span id="calculatedValue"></span> Aufrufe pro Abonnent</p>
+            </section>
+        </div>
+    </main>
+    <!-- Werbeanzeige -->
+    <aside>
+        <div class="ad">
+            <a href="https://sites.google.com/view/mctorn" target="_blank">
+                <img src="https://media.discordapp.net/attachments/949705030125109288/1169215281311268926/WP_Map_2.jpg?ex=6670b2d6&is=666f6156&hm=7626d991efbaa49251aa38f5ade2fdf902b3d7c9fee73bebd3e1cfbe02fb7e6a&" alt="MCTorn Werbeanzeige">
+                <p>Besuchen Sie MCTorn - Jetzt entdecken!</p>
+            </a>
+        </div>
+    </aside>
+
+<script src="lerntraeger.js"></script>
+
+<script>
+/* Erzeugt ein Objekt der Klasse Lernträger */
+const lerntraeger = new Lerntraeger("Student099");
+
+/* Elemente für die Benutzereingabe und Anzeige */
+let inputYouTubeLink = document.getElementById("inputYouTubeLink");
+let listOfDriveModes = document.getElementsByName("driveControl");
+let channelValueDisplay = document.getElementById("channelValue");
+let calculatedValueDisplay = document.getElementById("calculatedValue");
+let calculatedValueText = document.getElementById("calculatedValueText");
+
+/* Funktion zur Steuerung des Fahrwerks */
+function driveCar() {
+    let driveMode;
+
+    // Durchläuft alle Radiobuttons und findet den ausgewählten
+    for (let i = 0; i < listOfDriveModes.length; i++) {
+        let rb = listOfDriveModes[i];
+        if (rb.checked) {
+            driveMode = rb.value;
+        }
+    }
+
+    // Setzt den Fahrmodus entsprechend der Auswahl
+    if(driveMode == "forward"){
+        lerntraeger.setDriveForward(true);
+    }
+    if(driveMode == "backward"){
+        lerntraeger.setDriveBackward(true);
+    }
+    if(driveMode == "flight"){
+        lerntraeger.setFlightMode(true);
+    }
+}
+
+/* Funktion zur Analyse des YouTube-Kanals */
+function analyzeYouTubeChannel() {
+    const apiKey = 'AIzaSyCrZVZMCuN6D_HvptcHwp6f7KLDZN3-nsE'; // API-Schlüssel
+    const channelLink = inputYouTubeLink.value;
+    const identifier = extractIdentifier(channelLink);
+
+    // Überprüft, ob die Kanal-ID korrekt extrahiert wurde
+    if (!identifier) {
+        displayError("Ungültiger YouTube-Link. Bitte überprüfen Sie den Link.");
+        return;
+    }
+
+    // URL für API-Anfrage
+    const url = `https://www.googleapis.com/youtube/v3/channels?part=statistics&${identifier.type}=${identifier.value}&key=${apiKey}`;
+
+    // Führt die API-Anfrage aus
+    fetch(url)
+        .then(response => {
+            if (!response.ok) {
+                throw new Error(`API-Anfrage fehlgeschlagen mit Status: ${response.status}`);
+            }
+            return response.json();
+        })
+        .then(data => {
+            if (data.items && data.items.length > 0) {
+                const statistics = data.items[0].statistics;
+                const subscriberCount = parseInt(statistics.subscriberCount);
+                const viewCount = parseInt(statistics.viewCount);
+                analyzeWithValues(viewCount, subscriberCount);
+            } else {
+                displayError("Keine Daten gefunden. Bitte überprüfen Sie den Link oder versuchen Sie es später erneut.");
+                console.error("API-Antwort:", data);
+            }
+        })
+        .catch(error => {
+            console.error("Fehler bei der API-Anfrage:", error);
+            displayError(`Fehler bei der API-Anfrage: ${error.message}`);
+        });
+}
+
+/* Funktion zur Extraktion der Kanal-ID aus der URL */
+function extractIdentifier(url) {
+    try {
+        const urlObj = new URL(url);
+        const pathSegments = urlObj.pathname.split('/');
+        if (pathSegments[1].startsWith('@')) {
+            return { type: 'forUsername', value: pathSegments[1].substring(1) }; // Entfernt das '@' Zeichen
+        } else if (pathSegments[1] === 'channel') {
+            return { type: 'id', value: pathSegments[2] };
+        } else {
+            return null;
+        }
+    } catch (error) {
+        console.error('Ungültiger URL-Fehler:', error);
+        return null;
+    }
+}
+
+/* Funktion zur Analyse der Kanalwerte */
+function analyzeWithValues(viewCount, subscriberCount) {
+    if (subscriberCount > 0) {
+        const ratio = viewCount / subscriberCount;
+        if (ratio >= 800) {
+            lerntraeger.setFlightMode(true);
+            document.getElementById("flight").checked = true;
+        } else if (ratio >= 500) {
+            lerntraeger.setDriveForward(true);
+            document.getElementById("forward").checked = true;
+        } else {
+            lerntraeger.setDriveBackward(true);
+            document.getElementById("backward").checked = true;
+        }
+
+        // Zeigt den Wert des Kanals an
+        const channelValue = ratio.toFixed(2);
+        channelValueDisplay.textContent = `Der Kanal, den der Lernträger trägt, hat ein Verhältnis von ${channelValue} Aufrufe pro Abonnent!`;
+        calculatedValueDisplay.textContent = channelValue; // Zeigt den berechneten Wert
+        calculatedValueText.style.display = 'block';
+    } else {
+        displayError("Keine Abonnenten vorhanden.");
+    }
+}
+
+/* Funktion zur Anzeige von Fehlermeldungen */
+function displayError(message) {
+    channelValueDisplay.textContent = message;
+    calculatedValueDisplay.textContent = '';
+    calculatedValueText.style.display = 'none';
+}
+
+</script>
+
+</html>
